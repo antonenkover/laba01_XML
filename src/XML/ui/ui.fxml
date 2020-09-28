@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="646.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="XML.controllers.Controller">
+    <Button fx:id="saveToXML" layoutX="151.0" layoutY="516.0" mnemonicParsing="false" onAction="#saveToXML"
+            text="Save"/>
+    <Label layoutX="146.0" layoutY="488.0" text="Save to XML"/>
+    <Button fx:id="parseXML" layoutX="241.0" layoutY="516.0" mnemonicParsing="false" onAction="#parseXML" text="Parse"/>
+    <Label layoutX="239.0" layoutY="489.0" text="Parse XML"/>
+    <Button fx:id="confirmDepartmentCRUD" layoutX="447.0" layoutY="335.0" mnemonicParsing="false"
+            onAction="#departmentCRUD" text="Confirm"/>
+    <TextField fx:id="departmentNameInput" layoutX="407.0" layoutY="187.0" prefHeight="27.0" prefWidth="143.0"/>
+    <RadioButton fx:id="RbAddDepartment" layoutX="416.0" layoutY="234.0" mnemonicParsing="false" text="Add department"/>
+    <RadioButton fx:id="RbDeleteDepartment" layoutX="416.0" layoutY="264.0" mnemonicParsing="false"
+                 text="Delete department"/>
+    <Button fx:id="openXML" layoutX="22.0" layoutY="516.0" mnemonicParsing="false" onAction="#openXMLFile"
+            text="Open XML File"/>
+    <Label layoutX="448.0" layoutY="167.0" text="Enter name"/>
+    <TextField fx:id="productNameInput" layoutX="609.0" layoutY="308.0" prefHeight="27.0" prefWidth="143.0"/>
+    <TextField fx:id="productWeightInput" layoutX="610.0" layoutY="368.0" prefHeight="27.0" prefWidth="143.0"/>
+    <TextField fx:id="productPriceInput" layoutX="610.0" layoutY="430.0" prefHeight="27.0" prefWidth="143.0"/>
+    <Label layoutX="643.0" layoutY="289.0" text="Product name"/>
+    <Label layoutX="643.0" layoutY="350.0" text="Product weight"/>
+    <Label layoutX="643.0" layoutY="413.0" text="Product price"/>
+    <TextField fx:id="productBarcodeInput" layoutX="607.0" layoutY="247.0" prefHeight="27.0" prefWidth="143.0"/>
+    <Label layoutX="640.0" layoutY="228.0" text="Product barcode"/>
+    <Button fx:id="confirmProductCRUD" layoutX="647.0" layoutY="568.0" mnemonicParsing="false" onAction="#productCRUD"
+            text="Confirm"/>
+    <TextField fx:id="departmentIDInput" layoutX="408.0" layoutY="130.0" prefHeight="27.0" prefWidth="143.0"/>
+    <Label layoutX="451.0" layoutY="108.0" text="Enter id"/>
+    <RadioButton fx:id="RbUpdateDepartment" layoutX="417.0" layoutY="295.0" mnemonicParsing="false"
+                 text="Update department"/>
+    <RadioButton fx:id="RbAddProduct" layoutX="619.0" layoutY="471.0" mnemonicParsing="false" text="Add product"/>
+    <RadioButton fx:id="RbDeleteProduct" layoutX="619.0" layoutY="501.0" mnemonicParsing="false" text="Delete product"/>
+    <RadioButton fx:id="RbUpdateProduct" layoutX="620.0" layoutY="532.0" mnemonicParsing="false" text="Update product"/>
+    <Button fx:id="listAllDepartments" layoutX="22.0" layoutY="565.0" mnemonicParsing="false"
+            onAction="#listAllDepartments" text="List all departments"/>
+    <Button fx:id="searchProductOrDepByID" layoutX="459.0" layoutY="601.0" mnemonicParsing="false"
+            onAction="#searchProductOrDepartmentByID" text="Find"/>
+    <TextField fx:id="barcodeOrIDInput" layoutX="438.0" layoutY="466.0" prefHeight="27.0" prefWidth="83.0"/>
+    <RadioButton fx:id="searchDepartmentByID" layoutX="436.0" layoutY="513.0" mnemonicParsing="false"
+                 text="Department"/>
+    <RadioButton fx:id="searchProductByID" layoutX="437.0" layoutY="572.0" mnemonicParsing="false" text="Product"/>
+    <Label layoutX="431.0" layoutY="448.0" text="Barcode/id search"/>
+    <TextArea fx:id="mainTextPane" layoutX="17.0" layoutY="25.0" prefHeight="311.0" prefWidth="369.0" wrapText="true"/>
+    <TextArea fx:id="errorTextPane" layoutX="17.0" layoutY="365.0" prefHeight="109.0" prefWidth="370.0"
+              wrapText="true"/>
+    <Label layoutX="599.0" layoutY="114.0" prefHeight="45.0" prefWidth="155.0" text="To choose department enter id"
+           textAlignment="CENTER" underline="true" wrapText="true"/>
+    <TextField fx:id="productSearchDepartmentId" layoutX="607.0" layoutY="185.0" prefHeight="27.0" prefWidth="143.0"/>
+    <Label layoutX="630.0" layoutY="165.0" text="Department id"/>
+    <Button fx:id="viewAllXML" layoutX="36.0" layoutY="604.0" mnemonicParsing="false" onAction="#viewAllXML"
+            text="View all XML"/>
+    <CheckBox fx:id="showProductsByIdSearch" layoutX="436.0" layoutY="537.0" mnemonicParsing="false"
+              text="show products"/>
+    <Label layoutX="465.0" layoutY="2.0" prefHeight="110.0" prefWidth="247.0"
+           text="On update department/product, ID/barcode MUST be written correctly in order to initialize department/product. All other properties may be altered."
+           textAlignment="CENTER" underline="true" wrapText="true"/>
+    <Label layoutX="398.0" layoutY="378.0" prefHeight="79.0" prefWidth="169.0"
+           text="Search department/product based on id/barcode" textAlignment="CENTER" underline="true"
+           wrapText="true"/>
+    <Button fx:id="countAllDepartments" layoutX="228.0" layoutY="565.0" mnemonicParsing="false" text="Count departments"
+            onAction="#countAllDepartments"/>
+    <Button fx:id="countAllProducts" layoutX="239.0" layoutY="603.0" mnemonicParsing="false" text="Count products"
+            onAction="#countAllProducts"/>
+</AnchorPane>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Storage id="1" name="Amazon">
+    <Department id="1" name="Dairy">
+        <Product barcode="111" name="Milk" weight="1" price="5"/>
+    </Department>
+    <Department id="2" name="Bakery">
+        <Product barcode="222" name="Bread" weight="2" price="2"/>
+    </Department>
+    <Department id="3" name="Home goods">
+        <Product barcode="333" name="Mug" weight="3" price="3"/>
+    </Department>
+    <Department id="4" name="Drinks">
+        <Product barcode="404" name="Tea" weight="1" price="4"/>
+        <Product barcode="444" name="Coffee" weight="1" price="5"/>
+    </Department>
+</Storage>
