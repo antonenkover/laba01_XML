@@ -1,8 +1,8 @@
 package XML.services;
 
-import XML.classes.Department;
-import XML.classes.Product;
-import XML.classes.Warehouse;
+import XML.models.Department;
+import XML.models.Product;
+import XML.models.Warehouse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -15,8 +15,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +50,9 @@ public class ParserService {
 //        return amazonWarehouse;
 //    }
 
-    public Warehouse parseXML(String filepath) {
+    Document doc = null;
+
+    public String validateXML(String filepath) {
         DocumentBuilder db = null;
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema s = null;
@@ -57,6 +61,8 @@ public class ParserService {
         } catch (SAXException e) {
             e.printStackTrace();
         }
+        assert s != null;
+        Validator validator = s.newValidator();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setValidating(false);
         dbf.setSchema(s);
@@ -66,18 +72,30 @@ public class ParserService {
             e.printStackTrace();
         }
         assert db != null;
-        db.setErrorHandler(new CustomErrorHandler());
-        Document doc = null;
+        Source source = new StreamSource(filepath);
         try {
-            doc = db.parse(new File(filepath));
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            db.setErrorHandler(new CustomErrorHandler());
+            try {
+                doc = db.parse(new File(filepath));
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            validator.validate(source);
+            return null;
+        } catch (SAXException | IOException ex) {
+            return "XML file is invalid because " + ex.getMessage();
         }
+    }
 
+    public Warehouse parseXML() {
         assert doc != null;
-        Element root = doc.getDocumentElement();
+        return createWarehouse(doc);
+    }
 
+    public Warehouse createWarehouse(Document doc) {
+        assert doc != null;
         Warehouse warehouse = null;
+        Element root = doc.getDocumentElement();
         if (root.getTagName().equals("Storage")) {
             int id = Integer.parseInt(root.getAttribute("id"));
             String name = root.getAttribute("name");
@@ -101,10 +119,7 @@ public class ParserService {
                 }
             }
         }
-
-        assert warehouse != null;
         return warehouse;
-
     }
 
     public void createXML(String filepath, Warehouse warehouse) {

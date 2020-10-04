@@ -5,10 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.BasicConfigurator;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+        BasicConfigurator.configure();
         launch(args);
     }
 

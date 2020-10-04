@@ -1,4 +1,4 @@
-package XML.classes;
+package XML.models;
 
 import java.util.ArrayList;
 import java.util.Objects;
