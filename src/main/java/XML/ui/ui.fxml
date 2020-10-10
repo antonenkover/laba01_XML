@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="646.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="XML.controllers.Controller">
+            fx:controller="main.java.XML.formviews.FormView">
     <Button fx:id="saveToXML" layoutX="260.0" layoutY="516.0" mnemonicParsing="false" onAction="#saveToXML"
             text="Save"/>
     <Label layoutX="245.0" layoutY="488.0" text="Save to XML"/>
@@ -43,9 +43,7 @@
                  text="Department"/>
     <RadioButton fx:id="searchProductByID" layoutX="437.0" layoutY="572.0" mnemonicParsing="false" text="Product"/>
     <Label layoutX="431.0" layoutY="448.0" text="Barcode/id search"/>
-    <TextArea fx:id="mainTextPane" layoutX="17.0" layoutY="25.0" prefHeight="311.0" prefWidth="369.0" wrapText="true"/>
-    <TextArea fx:id="errorTextPane" layoutX="17.0" layoutY="365.0" prefHeight="109.0" prefWidth="370.0"
-              wrapText="true"/>
+    <TextArea fx:id="mainTextPane" layoutX="17.0" layoutY="25.0" prefHeight="451.0" prefWidth="372.0" wrapText="true"/>
     <Label layoutX="599.0" layoutY="114.0" prefHeight="45.0" prefWidth="155.0" text="To choose department enter id"
            textAlignment="CENTER" underline="true" wrapText="true"/>
     <TextField fx:id="productSearchDepartmentId" layoutX="607.0" layoutY="185.0" prefHeight="27.0" prefWidth="143.0"/>

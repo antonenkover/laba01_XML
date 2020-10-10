@@ -1,19 +1,20 @@
-package XML.controllers;
+package main.java.XML.formviews;
 
-import XML.models.Department;
-import XML.models.Product;
-import XML.models.Warehouse;
-import XML.services.ParserService;
-import XML.views.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.java.XML.models.Department;
+import main.java.XML.models.Product;
+import main.java.XML.models.Warehouse;
+import main.java.XML.services.ParserService;
+import main.java.XML.views.View;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.util.Optional;
 
-public class Controller extends View {
+public class FormView extends View {
 
     private final ParserService parserService = new ParserService();
     Warehouse warehouse = new Warehouse(1, "Amazon");
@@ -87,13 +88,22 @@ public class Controller extends View {
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
             String xmlFile = selectedFile.getAbsolutePath();
-            String isXMLValid = parserService.validateXML(xmlFile);
-            if (isXMLValid == null) {
+            try {
+                parserService.validateXML(xmlFile);
                 warehouse = parserService.parseXML();
                 setMainTextPaneText(warehouse.toString());
-            } else {
-                setErrorTextPaneText(isXMLValid);
+            } catch (SAXException e) {
+                e.printStackTrace();
             }
+
+//            if (isXMLValid == null) {
+//                warehouse = parserService.parseXML();
+//                setMainTextPaneText(warehouse.toString());
+//            } else {
+//                showErrorMessage(isXMLValid);
+//            }
+        } else {
+            showWarningMessage("You haven't chosen XML file.");
         }
     }
 
@@ -104,13 +114,15 @@ public class Controller extends View {
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
             parserService.createXML(file.getAbsolutePath(), warehouse);
-            setErrorTextPaneText("XML saved successfully to file\n " + file.getAbsolutePath());
+            showInformationDialog("XML saved successfully to file\n " + file.getAbsolutePath());
+        } else {
+            showWarningMessage("You haven't selected a file to save to. Saving not completed.");
         }
     }
 
     private void searchProductOrDepartmentByID() {
         if (getBarcodeOrIDInput().isEmpty()) {
-            setErrorTextPaneText("Please enter barcode or ID.");
+            showWarningMessage("ID or barcode wasn't entered.");
         } else {
             if (isSelectedSearchDepartmentByID()) {
                 Optional<Department> searchedDepartment = warehouse.getDepartmentById(Integer.parseInt(getBarcodeOrIDInput()));
@@ -122,13 +134,13 @@ public class Controller extends View {
             } else if (isSelectedSearchProductByID()) {
                 Optional<Product> searchedProduct = warehouse.getProductsByBarcode(getBarcodeOrIDInput());
                 setMainTextPaneText(searchedProduct.isPresent() ? searchedProduct.toString() : "Product not found.");
-            } else setErrorTextPaneText("Please choose whether you want to search department or product.");
+            } else showWarningMessage("Please choose whether you want to search department or product.");
         }
     }
 
     private void departmentCRUD() {
         if (getDepartmentIDInput().isEmpty() || getDepartmentNameInput().isEmpty()) {
-            setErrorTextPaneText("Please enter parameters of department");
+            showWarningMessage("Please enter parameters of department");
         } else {
             if (isSelectedRbAddDepartment()) {
                 Department department = new Department(Integer.parseInt(getDepartmentIDInput()), getDepartmentNameInput());
@@ -148,10 +160,10 @@ public class Controller extends View {
 
     private void productCRUD() {
         if (getProductSearchDepartmentId().isEmpty()) {
-            setErrorTextPaneText("Please enter department id.");
+            showWarningMessage("Please enter department id.");
         } else {
             if (getProductBarcodeInput().isEmpty() || getProductPriceInput().isEmpty() || getProductWeightInput().isEmpty() || getProductNameInput().isEmpty()) {
-                setErrorTextPaneText("Please enter all details about product.");
+                showWarningMessage("Please enter all details about product.");
             } else {
                 if (isSelectedRbAddProduct()) {
                     Product newProduct = new Product(getProductBarcodeInput(), getProductNameInput(), Integer.parseInt(getProductWeightInput()), Integer.parseInt(getProductPriceInput()));

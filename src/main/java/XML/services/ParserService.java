@@ -1,8 +1,8 @@
-package XML.services;
+package main.java.XML.services;
 
-import XML.models.Department;
-import XML.models.Product;
-import XML.models.Warehouse;
+import main.java.XML.models.Department;
+import main.java.XML.models.Product;
+import main.java.XML.models.Warehouse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -52,7 +52,7 @@ public class ParserService {
 
     Document doc = null;
 
-    public String validateXML(String filepath) {
+    public void validateXML(String filepath) throws SAXException {
         DocumentBuilder db = null;
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema s = null;
@@ -73,17 +73,12 @@ public class ParserService {
         }
         assert db != null;
         Source source = new StreamSource(filepath);
+        db.setErrorHandler(new CustomErrorHandler());
         try {
-            db.setErrorHandler(new CustomErrorHandler());
-            try {
-                doc = db.parse(new File(filepath));
-            } catch (SAXException | IOException e) {
-                e.printStackTrace();
-            }
+            doc = db.parse(new File(filepath));
             validator.validate(source);
-            return null;
-        } catch (SAXException | IOException ex) {
-            return "XML file is invalid because " + ex.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

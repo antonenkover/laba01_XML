@@ -1,4 +1,4 @@
-package XML.models;
+package main.java.XML.models;
 
 import java.util.Objects;
 

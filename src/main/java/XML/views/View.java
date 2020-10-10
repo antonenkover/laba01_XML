@@ -1,7 +1,8 @@
-package XML.views;
+package main.java.XML.views;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 
 public class View {
     @FXML
@@ -48,8 +49,6 @@ public class View {
     public RadioButton searchProductByID;
     @FXML
     public TextArea mainTextPane;
-    @FXML
-    public TextArea errorTextPane;
     @FXML
     public TextField productSearchDepartmentId;
     @FXML
@@ -109,13 +108,8 @@ public class View {
         return productSearchDepartmentId.getText();
     }
 
-
     public void setMainTextPaneText(String text) {
         mainTextPane.setText(text);
-    }
-
-    public void setErrorTextPaneText(String text) {
-        errorTextPane.setText(text);
     }
 
     public boolean isSelectedRbAddDepartment() {
@@ -152,5 +146,42 @@ public class View {
 
     public boolean isSelectedShowProductsByIdSearch() {
         return showProductsByIdSearch.isSelected();
+    }
+
+    public void showErrorMessage(String error) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText(error);
+
+        alert.showAndWait();
+    }
+
+    public void showWarningMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    public void showInformationDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+
+    public void printStackTrace(String ex) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Exception Dialog");
+        alert.setHeaderText("Chosen XML file is not valid.");
+        alert.setContentText(ex);
+
+        alert.showAndWait();
     }
 }
